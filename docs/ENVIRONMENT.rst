@@ -63,9 +63,6 @@ These environment variables are optional:
   Must be a *NET* from one of the **Coin** classes in `lib/coins.py`_.
   Defaults to `mainnet`.
 
-  Note Bitcoin Core >= 0.13.1 requires a special *NET* for testnet:
-  `testnet-segwit`.
-
 * **DB_ENGINE**
 
   Database engine for the UTXO and history database.  The default is

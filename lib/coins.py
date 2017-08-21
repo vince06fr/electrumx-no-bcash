@@ -383,20 +383,6 @@ class BitcoinRegtest(BitcoinTestnet):
     PEERS= []
     TX_COUNT = 1
     TX_COUNT_HEIGHT = 1
-    DESERIALIZER = DeserializerSegWit
-
-
-class BitcoinTestnetSegWit(BitcoinTestnet):
-    '''Bitcoin Testnet for Core bitcoind >= 0.13.1.
-
-    Unfortunately 0.13.1 broke backwards compatibility of the RPC
-    interface's TX serialization, SegWit transactions serialize
-    differently than with earlier versions.  If you are using such a
-    bitcoind on testnet, you must use this class as your "COIN".
-    '''
-    NET = "testnet-segwit"
-    DESERIALIZER = DeserializerSegWit
-
 
 class BitcoinNolnet(Bitcoin):
     '''Bitcoin Unlimited nolimit testnet.'''
