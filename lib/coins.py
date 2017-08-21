@@ -384,24 +384,6 @@ class BitcoinRegtest(BitcoinTestnet):
     TX_COUNT = 1
     TX_COUNT_HEIGHT = 1
 
-class BitcoinNolnet(Bitcoin):
-    '''Bitcoin Unlimited nolimit testnet.'''
-
-    NET = "nolnet"
-    GENESIS_HASH = ('0000000057e31bd2066c939a63b7b862'
-                    '3bd0f10d8c001304bdfc1a7902ae6d35')
-    REORG_LIMIT = 8000
-    TX_COUNT = 583589
-    TX_COUNT_HEIGHT = 8617
-    TX_PER_BLOCK = 50
-    IRC_PREFIX = "EN_"
-    RPC_PORT = 28332
-    PEER_DEFAULT_PORTS = {'t': '52001', 's': '52002'}
-    PEERS = [
-        '14.3.140.101 s t',
-    ]
-
-
 class Litecoin(Coin):
     NAME = "Litecoin"
     SHORTNAME = "LTC"

@@ -120,7 +120,7 @@ These environment variables are optional:
   + **$DAEMON_VERSION** is replaced with the daemon's version as a
     dot-separated string. For example *0.12.1*.
   + **$DAEMON_SUBVERSION** is replaced with the daemon's user agent
-    string.  For example, `/BitcoinUnlimited:0.12.1(EB16; AD4)/`.
+    string.  For example, `/Satoshi:0.14.2/`.
   + **$DONATION_ADDRESS** is replaced with the address from the
     **DONATION_ADDRESS** environment variable.
 
