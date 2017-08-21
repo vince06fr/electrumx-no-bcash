@@ -328,28 +328,11 @@ class Bitcoin(Coin):
     WIF_BYTE = bytes.fromhex("80")
     GENESIS_HASH = ('000000000019d6689c085ae165831e93'
                     '4ff763ae46a2a6c172b3f1b60a8ce26f')
+    DESERIALIZER = DeserializerSegWit
     TX_COUNT = 217380620
     TX_COUNT_HEIGHT = 464000
     TX_PER_BLOCK = 1800
     RPC_PORT = 8332
-    PEERS = [
-        'electroncash.bitcoinplug.com s t',
-        'electrum-abc.criptolayer.net s50012',
-        'electroncash.cascharia.com s50002',
-        'bcc.arihanc.com t52001 s52002',
-        'mash.1209l.com s t',
-        'bch.kokx.org s t',
-        'abc.vom-stausee.de t52001 s52002',
-        'abc1.hsmiths.com t60001 s60002',
-        'ELECTRUM.not.fyi p1000 s t',
-        'electrum.hsmiths.com s t',
-    ]
-
-
-class BitcoinSegwit(Bitcoin):
-    NET = "bitcoin-segwit"
-    DESERIALIZER = DeserializerSegWit
-
     PEERS = [
         'btc.smsys.me s995',
         'electrum.be s t',
