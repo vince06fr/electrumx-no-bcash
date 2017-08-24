@@ -336,7 +336,7 @@ class Bitcoin(Coin):
     PEERS = [
         'btc.smsys.me s995',
         'electrum.be s t',
-        'ELECTRUM.not.fyi p1000 s t',
+        'ELECTRUMX.not.fyi s t',
         'electrum.vom-stausee.de s t',
         'electrum3.hachre.de p10000 s t',
         'electrum.hsmiths.com s t',
