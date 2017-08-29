@@ -42,7 +42,7 @@ from lib.script import ScriptPubKey
 from lib.tx import Deserializer, DeserializerSegWit, DeserializerAuxPow, \
     DeserializerZcash, DeserializerTxTime, DeserializerReddcoin
 from server.block_processor import BlockProcessor
-from server.daemon import Daemon, DashDaemon, LegacyRPCDaemon, FujiDaemon
+import server.daemon as daemon
 from server.session import ElectrumX, DashElectrumX
 
 
@@ -66,7 +66,7 @@ class Coin(object):
     STATIC_BLOCK_HEADERS = True
     SESSIONCLS = ElectrumX
     DESERIALIZER = Deserializer
-    DAEMON = Daemon
+    DAEMON = daemon.Daemon
     BLOCK_PROCESSOR = BlockProcessor
     XPUB_VERBYTES = bytes('????', 'utf-8')
     XPRV_VERBYTES = bytes('????', 'utf-8')
@@ -564,7 +564,7 @@ class Dash(Coin):
         'wl4sfwq2hwxnodof.onion s t',
     ]
     SESSIONCLS = DashElectrumX
-    DAEMON = DashDaemon
+    DAEMON = daemon.DashDaemon
 
     @classmethod
     def header_hash(cls, header):
@@ -766,7 +766,7 @@ class Blackcoin(Coin):
     GENESIS_HASH = ('000001faef25dec4fbcf906e6242621d'
                     'f2c183bf232f263d0ba5b101911e4563')
     DESERIALIZER = DeserializerTxTime
-    DAEMON = LegacyRPCDaemon
+    DAEMON = daemon.LegacyRPCDaemon
     TX_COUNT = 4594999
     TX_COUNT_HEIGHT = 1667070
     TX_PER_BLOCK = 3
@@ -800,7 +800,7 @@ class Peercoin(Coin):
     GENESIS_HASH = ('0000000032fe677166d54963b62a4677'
                     'd8957e87c508eaa4fd7eb1c880cd27e3')
     DESERIALIZER = DeserializerTxTime
-    DAEMON = LegacyRPCDaemon
+    DAEMON = daemon.LegacyRPCDaemon
     TX_COUNT = 1207356
     TX_COUNT_HEIGHT = 306425
     TX_PER_BLOCK = 4
@@ -870,6 +870,7 @@ class Monacoin(Coin):
         'electrumx2.movsign.info t',
     ]
 
+
 class Crown(AuxPowMixin, Coin):
     NAME = "Crown"
     SHORTNAME = "CRW"
@@ -877,7 +878,7 @@ class Crown(AuxPowMixin, Coin):
     XPUB_VERBYTES = bytes.fromhex("0488b21e")
     XPRV_VERBYTES = bytes.fromhex("0488ade4")
     P2PKH_VERBYTE = bytes.fromhex("00")
-    P2SH_VERBYTES = [bytes.fromhex("05")]
+    P2SH_VERBYTES = [bytes.fromhex("1c")]
     WIF_BYTE = bytes.fromhex("80")
     GENESIS_HASH = ('0000000085370d5e122f64f4ab19c686'
                     '14ff3df78c8d13cb814fd7e69a1dc6da')
@@ -885,6 +886,8 @@ class Crown(AuxPowMixin, Coin):
     TX_COUNT_HEIGHT = 1268206
     TX_PER_BLOCK = 10
     RPC_PORT = 9341
+    REORG_LIMIT = 1000
+
 
 class Fujicoin(Coin):
     NAME = "Fujicoin"
@@ -897,10 +900,11 @@ class Fujicoin(Coin):
     WIF_BYTE = bytes.fromhex("a4")
     GENESIS_HASH = ('adb6d9cfd74075e7f91608add4bd2a2e'
                     'a636f70856183086842667a1597714a0')
-#    DESERIALIZER = DeserializerSegWit
-    DAEMON = FujiDaemon
+    ESTIMATE_FEE = 0.001
+    RELAY_FEE = 0.001
+    DAEMON = daemon.FakeEstimateFeeDaemon
     TX_COUNT = 170478
     TX_COUNT_HEIGHT = 1521676
     TX_PER_BLOCK = 1
     RPC_PORT = 3776
-#    REORG_LIMIT = 1000
+    REORG_LIMIT = 1000

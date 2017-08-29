@@ -34,9 +34,10 @@ class Daemon(util.LoggedClass):
     class DaemonWarmingUpError(Exception):
         '''Raised when the daemon returns an error in its results.'''
 
-    def __init__(self, urls):
+    def __init__(self, env):
         super().__init__()
-        self.set_urls(urls)
+        self.coin = env.coin
+        self.set_urls(env.coin.daemon_urls(env.daemon_url))
         self._height = None
         self._mempool_hashes = set()
         self.mempool_refresh_event = asyncio.Event()
@@ -263,7 +264,9 @@ class Daemon(util.LoggedClass):
         If the daemon has not been queried yet this returns None.'''
         return self._height
 
+
 class DashDaemon(Daemon):
+
     async def masternode_broadcast(self, params):
         '''Broadcast a transaction to the network.'''
         return await self._send_single('masternodebroadcast', params)
@@ -272,18 +275,20 @@ class DashDaemon(Daemon):
         '''Return the masternode status.'''
         return await self._send_single('masternodelist', params)
 
-class FujiDaemon(Daemon):
-    '''This is a measure against coin daemon which does not have the 'estimatefee' command.
-    When the electrum is in 'Use dynamic fees' mode, the estimatefee does not return from electrum-X, so the user can not remit money.
-    See class Fujicoin() in lib/coins.py for usage.'''
+
+class FakeEstimateFeeDaemon(Daemon):
+    '''Daemon that simulates estimatefee and relayfee RPC calls. Coin that
+    wants to use this daemon must define ESTIMATE_FEE & RELAY_FEE'''
+
     async def estimatefee(self, params):
         '''Return the fee estimate for the given parameters.'''
-        return 0.001
+        return self.coin.ESTIMATE_FEE
 
     async def relayfee(self):
         '''The minimum fee a low-priority tx must pay in order to be accepted
         to the daemon's memory pool.'''
-        return 0.001
+        return self.coin.RELAY_FEE
+
 
 class LegacyRPCDaemon(Daemon):
     '''Handles connections to a daemon at the given URL.
@@ -294,10 +299,9 @@ class LegacyRPCDaemon(Daemon):
     as in the underlying blockchain but it is good enough for our indexing
     purposes.'''
 
-
     async def raw_blocks(self, hex_hashes):
         '''Return the raw binary blocks with the given hex hashes.'''
-        params_iterable = ((h, False) for h in hex_hashes)
+        params_iterable = ((h, ) for h in hex_hashes)
         block_info = await self._send_vector('getblock', params_iterable)
 
         blocks = []
@@ -340,4 +344,6 @@ class LegacyRPCDaemon(Daemon):
         return raw_block
 
     def timestamp_safe(self, t):
-        return t if isinstance(t, int) else timegm(strptime(t, "%Y-%m-%d %H:%M:%S %Z"))
+        if isinstance(t, int):
+            return t
+        return timegm(strptime(t, "%Y-%m-%d %H:%M:%S %Z"))
