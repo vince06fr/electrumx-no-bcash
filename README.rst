@@ -122,16 +122,35 @@ and associated complications.
 Roadmap
 =======
 
-- Python 3.6, which has several performance improvements relevant to
-  ElectrumX
-- UTXO root logic and implementation
-- incremental history serving / pruning
+- Require Python 3.6, which has several performance improvements
+  relevant to ElectrumX
+- offloading more work to synchronize to the client
+- supporting better client privacy
+- wallet server engine
 - new features such as possibly adding label server functionality
 - potentially move some functionality to C or C++
 
 
 ChangeLog
 =========
+
+Version 1.1pre1
+---------------
+
+Many changes, mostly to prepare for support of Electrum protocol 1.1
+which the next Electrum client release will use.
+
+- implement protocol version 1.1 and update protocol documentation
+- rework lib/coins.py for the various bitcoin flavours
+- show protocol version in "seessions" ElectrumX RPC call
+- permit **HOST** envvar to be a comma-separated list
+- daemon abstraction refactoring (erasmospunk)
+- permit alternative event loop policies (based on suggestion / work
+  of JustinTArthur)
+- misc configuration updates (SubPar)
+- add Neblio support (neblioteam) and Bitbay (anoxxxy)
+- HOTO.rst update for running on priveleged port (EagleTM)
+- issues closed: exclude test dirs from installation (`#223`_).
 
 Version 1.0.17
 --------------
@@ -314,6 +333,7 @@ Version 1.0
 .. _#162: https://github.com/kyuupichan/electrumx/issues/162
 .. _#163: https://github.com/kyuupichan/electrumx/issues/163
 .. _#180: https://github.com/kyuupichan/electrumx/issues/180
+.. _#223: https://github.com/kyuupichan/electrumx/issues/223
 .. _docs/HOWTO.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/HOWTO.rst
 .. _docs/ENVIRONMENT.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/ENVIRONMENT.rst
 .. _docs/PEER_DISCOVERY.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/PEER_DISCOVERY.rst

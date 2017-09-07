@@ -83,3 +83,30 @@ def test_is_valid_hostname():
     len255 = ('a' * 62 + '.') * 4 + 'abc'
     assert is_valid_hostname(len255)
     assert not is_valid_hostname(len255 + 'd')
+
+
+def test_protocol_tuple():
+    assert util.protocol_tuple(None) == (0, )
+    assert util.protocol_tuple("foo") == (0, )
+    assert util.protocol_tuple(1) == (0, )
+    assert util.protocol_tuple("1") == (1, )
+    assert util.protocol_tuple("0.1") == (0, 1)
+    assert util.protocol_tuple("0.10") == (0, 10)
+    assert util.protocol_tuple("2.5.3") == (2, 5, 3)
+
+def test_protocol_version():
+    assert util.protocol_version(None, "1.0", "1.0") == (1, 0)
+    assert util.protocol_version("0.10", "0.10", "1.1") == (0, 10)
+
+    assert util.protocol_version("1.0", "1.0", "1.0") == (1, 0)
+    assert util.protocol_version("1.0", "1.0", "1.1") == (1, 0)
+    assert util.protocol_version("1.1", "1.0", "1.1") == (1, 1)
+    assert util.protocol_version("1.2", "1.0", "1.1") is None
+    assert util.protocol_version("0.9", "1.0", "1.1") is None
+
+    assert util.protocol_version(["0.9", "1.0"], "1.0", "1.1") == (1, 0)
+    assert util.protocol_version(["0.9", "1.1"], "1.0", "1.1") == (1, 1)
+    assert util.protocol_version(["1.1", "0.9"], "1.0", "1.1") is None
+    assert util.protocol_version(["0.8", "0.9"], "1.0", "1.1") is None
+    assert util.protocol_version(["1.1", "1.2"], "1.0", "1.1") == (1, 1)
+    assert util.protocol_version(["1.2", "1.3"], "1.0", "1.1") is None
