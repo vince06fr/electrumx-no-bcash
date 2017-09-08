@@ -134,6 +134,16 @@ Roadmap
 ChangeLog
 =========
 
+Version 1.1pre2
+---------------
+
+- peerdisc: handle protocol 1.1 server replies
+- issue `#251`_: fix protocol version reported in server.peers.subscribe
+- fix handling of failed transaction broadcast
+- fix typos (SomberNight)
+- doc and test updates
+- dash: return errors in JSON error field for protocol 1.1
+
 Version 1.1pre1
 ---------------
 
@@ -142,14 +152,14 @@ which the next Electrum client release will use.
 
 - implement protocol version 1.1 and update protocol documentation
 - rework lib/coins.py for the various bitcoin flavours
-- show protocol version in "seessions" ElectrumX RPC call
+- show protocol version in "sessions" ElectrumX RPC call
 - permit **HOST** envvar to be a comma-separated list
 - daemon abstraction refactoring (erasmospunk)
 - permit alternative event loop policies (based on suggestion / work
   of JustinTArthur)
 - misc configuration updates (SubPar)
 - add Neblio support (neblioteam) and Bitbay (anoxxxy)
-- HOTO.rst update for running on priveleged port (EagleTM)
+- HOWTO.rst update for running on privileged port (EagleTM)
 - issues closed: exclude test dirs from installation (`#223`_).
 
 Version 1.0.17
@@ -334,6 +344,7 @@ Version 1.0
 .. _#163: https://github.com/kyuupichan/electrumx/issues/163
 .. _#180: https://github.com/kyuupichan/electrumx/issues/180
 .. _#223: https://github.com/kyuupichan/electrumx/issues/223
+.. _#251: https://github.com/kyuupichan/electrumx/issues/251
 .. _docs/HOWTO.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/HOWTO.rst
 .. _docs/ENVIRONMENT.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/ENVIRONMENT.rst
 .. _docs/PEER_DISCOVERY.rst: https://github.com/kyuupichan/electrumx/blob/master/docs/PEER_DISCOVERY.rst
