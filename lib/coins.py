@@ -337,16 +337,15 @@ class BitcoinMixin(object):
 class Bitcoin(BitcoinMixin, Coin):
     PEERS = [
         'btc.smsys.me s995',
-        'electrum.be s t',
         'E-X.not.fyi s t',
+        'elec.luggs.co s443',
         'electrum.vom-stausee.de s t',
         'electrum3.hachre.de p10000 s t',
         'electrum.hsmiths.com s t',
         'erbium1.sytes.net s t',
-        'fdkhv2bb7hqel2e7.onion s t',
-        'h.1209k.com s t',
         'helicarrier.bauerj.eu s t',
         'hsmiths4fyqlw5xw.onion s t',
+        'luggscoqbymhvnkp.onion t80',
         'ozahtqwp25chjdjd.onion s t',
         'us11.einfachmalnettsein.de s t',
         'ELEX01.blackpole.online s t',

@@ -134,6 +134,15 @@ Roadmap
 ChangeLog
 =========
 
+Version 1.1
+-----------
+
+See the changelogs below for recent changes.
+
+- no longer persist peers, rediscover on restart
+- onion peers only reported if can connect; hard-coded exception removed
+- small fix for blockchain.transaction.broadcast
+
 Version 1.1pre2
 ---------------
 
