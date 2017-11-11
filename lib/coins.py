@@ -329,6 +329,7 @@ class BitcoinMixin(object):
     WIF_BYTE = bytes.fromhex("80")
     GENESIS_HASH = ('000000000019d6689c085ae165831e93'
                     '4ff763ae46a2a6c172b3f1b60a8ce26f')
+    RPC_PORT = 8332
     DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 217380620
     TX_COUNT_HEIGHT = 464000
@@ -416,6 +417,7 @@ class Litecoin(Coin):
         'elec.luggs.co s444',
         'electrum-ltc.bysh.me s t',
         'electrum-ltc.ddns.net s t',
+        'electrum-ltc.wilv.in s t',
         'electrum.cryptomachine.com p1000 s t',
         'electrum.ltc.xurious.com s t',
         'eywr5eubdbbe2laq.onion s50008 t50007',
