@@ -143,6 +143,10 @@ These environment variables are optional:
   + **$DONATION_ADDRESS** is replaced with the address from the
     **DONATION_ADDRESS** environment variable.
 
+  See https://github.com/shsmith/electrumx-banner-updater for a script
+  that updates a banner file periodically with useful statistics about
+  fees, last block time and height, etc.
+
 * **TOR_BANNER_FILE**
 
   As for **BANNER_FILE** (which is also the default) but shown to
@@ -296,9 +300,7 @@ some of this.
   By default peer discovery happens over the clear internet.  Set this
   to non-empty to force peer discovery to be done via the proxy.  This
   might be useful if you are running a Tor service exclusively and
-  wish to keep your IP address private.  **NOTE**: in such a case you
-  should leave **IRC** unset as IRC connections are *always* over the
-  normal internet.
+  wish to keep your IP address private.
 
 * **TOR_PROXY_HOST**
 
@@ -317,8 +319,8 @@ some of this.
 Server Advertising
 ------------------
 
-These environment variables affect how your server is advertised, both
-by peer discovery (if enabled) and IRC (if enabled).
+These environment variables affect how your server is advertised
+by peer discovery (if enabled).
 
 * **REPORT_HOST**
 
@@ -355,27 +357,6 @@ by peer discovery (if enabled) and IRC (if enabled).
   **NOTE**: Certificate-Authority signed certificates don't work over
   Tor, so you should set **REPORT_SSL_PORT_TOR** to 0 if yours is not
   self-signed.
-
-
-IRC
----
-
-Use the following environment variables if you want to advertise
-connectivity on IRC:
-
-* **IRC**
-
-  Set to anything non-empty to advertise on IRC.  ElectrumX connects
-  to IRC over the clear internet, always.
-
-* **IRC_NICK**
-
-  The nick to use when connecting to IRC.  The default is a hash of
-  **REPORT_HOST**.  Either way a prefix will be prepended depending on
-  **COIN** and **NET**.
-
-  If **REPORT_HOST_TOR** is set, an additional connection to IRC
-  happens with '_tor' appended to **IRC_NICK**.
 
 
 Cache
